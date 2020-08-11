@@ -51,17 +51,36 @@
         }
 
 
+        function Score(props) {
+            return (
+                <div className="scoreboard">
+                    <div className="teamstats">
+                        <h3>HOME</h3>
+                        <h3>{props.homeTeamStats.score}</h3>
+                    </div>
+
+                    <h3>SCOREBOARD</h3>
+
+                    <div className="teamstats">
+                        <h3>VISITORS</h3>
+                        <h3>{props.visitingTeamStats.score}</h3>
+                    </div>
+                </div>
+
+            )
+        }
+
         class Game extends React.Component {
             constructor(props) {
                 super(props)
 
                 this.state = {
-                    resetCount:0,
-                    homeTeamStats:{
+                    resetCount: 0,
+                    homeTeamStats: {
                         shots: 0,
                         score: 0
                     },
-                    visitingTeamStats:{
+                    visitingTeamStats: {
                         shots: 0,
                         score: 0
                     }
@@ -93,31 +112,35 @@
             }
 
 
-resetGame = () =>{
-this.setState((state,props) =>({
+            resetGame = () => {
+                this.setState((state, props) => ({
 
-resetCount: state.resetCount + 1,
+                    resetCount: state.resetCount + 1,
 
-homeTeamStats:{
+                    homeTeamStats: {
 
-shots:0,
-score:0
+                        shots: 0,
+                        score: 0
 
-},
+                    },
 
-visitingTeamStats:{
+                    visitingTeamStats: {
 
-shots:0,
-score:0
+                        shots: 0,
+                        score: 0
 
-}
+                    }
 
-}))
-}
+                }))
+            }
 
             render() {
                 return (
                     <div className="Game">
+                    <Score
+                    homeTeamStats={this.state.homeTeamStats}
+                    visitingTeamStats={this.state.visitingTeamStats}
+                    />
 
                         <h1>Count Dracula Welcomes You to {this.props.venue}</h1>
 
@@ -132,8 +155,8 @@ score:0
                             <div className="Verses">
                                 <h1> Vs.</h1>
                                 <div>
-                                <strong>Resets:</strong>{this.state.resetCount}
-                                <button onClick={this.resetGame}>Reset Game</button>
+                                    <strong>Resets:</strong>{this.state.resetCount}
+                                    <button onClick={this.resetGame}>Reset Game</button>
                                 </div>
                             </div>
 
